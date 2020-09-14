@@ -8,6 +8,13 @@ const htmlPlugin = new HtmlWebpackPlugin({
 })
 
 module.exports = {
+
+    
+        // assetsRoot:path.resolve(__dirname,'./dist'),
+        // assetsSubDirectory:'static',
+        // assetsPublicPath:'/',
+
+    
     mode: 'development',
     plugins: [
         htmlPlugin
@@ -15,7 +22,8 @@ module.exports = {
     module: {
         rules: [
             {test: /\.js|jsx$/, use: 'babel-loader', exclude:/node_modules/},//一定要加exclude
-            { test: /.css$/, use: ['style-loader', 'css-loader']}
+            { test: /.css$/, use: ['style-loader', 'css-loader']},
+            
         ]
     }    
 }

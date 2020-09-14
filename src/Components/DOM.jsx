@@ -52,29 +52,1157 @@ class DOM extends Component {
     }
 
     componentDidMount(){
-        axios.get('../../static/nba_mip.json')
-        .then(res=>{
-            this.setState({
-                initData: res.data.data,
-                viewData: dm.varia(res.data.data)
-            })
-        })
+        let nba_mip = {
+            "code": 200,
+            "data": [
+              {
+                "player": "James Harden",
+                "pts18": 1,
+                "pts19": 1
+              },
+              {
+                "player": "Paul George",
+                "pts18": 21,
+                "pts19": 2
+              },
+              {
+                "player": "Giannis Antetokounmpo",
+                "pts18": 5,
+                "pts19": 3
+              },
+              {
+                "player": "Joel Embiid",
+                "pts18": 15,
+                "pts19": 4
+              },
+              {
+                "player": "LeBron James",
+                "pts18": 3,
+                "pts19": 5
+              },
+              {
+                "player": "Stephen Curry",
+                "pts18": 6,
+                "pts19": 6
+              },
+              {
+                "player": "Devin Booker",
+                "pts18": 10,
+                "pts19": 8
+              },
+              {
+                "player": "Kevin Durant",
+                "pts18": 7,
+                "pts19": 9
+              },
+              {
+                "player": "Anthony Davis",
+                "pts18": 2,
+                "pts19": 10
+              },
+              {
+                "player": "Damian Lillard",
+                "pts18": 4,
+                "pts19": 11
+              },
+              {
+                "player": "Kemba Walker",
+                "pts18": 20,
+                "pts19": 12
+              },
+              {
+                "player": "Bradley Beal",
+                "pts18": 17,
+                "pts19": 13
+              },
+              {
+                "player": "Blake Griffin",
+                "pts18": 22,
+                "pts19": 14
+              },
+              {
+                "player": "Karl-Anthony Towns",
+                "pts18": 24,
+                "pts19": 15
+              },
+              {
+                "player": "Kyrie Irving",
+                "pts18": 11,
+                "pts19": 16
+              },
+              {
+                "player": "Donovan Mitchell",
+                "pts18": 25,
+                "pts19": 17
+              },
+              {
+                "player": "Zach LaVine",
+                "pts18": 51,
+                "pts19": 18
+              },
+              {
+                "player": "Russell Westbrook",
+                "pts18": 8,
+                "pts19": 19
+              },
+              {
+                "player": "Klay Thompson",
+                "pts18": 28,
+                "pts19": 20
+              },
+              {
+                "player": "Julius Randle",
+                "pts18": 58,
+                "pts19": 21
+              },
+              {
+                "player": "LaMarcus Aldridge",
+                "pts18": 12,
+                "pts19": 22
+              },
+              {
+                "player": "DeMar DeRozan",
+                "pts18": 14,
+                "pts19": 23
+              },
+              {
+                "player": "Jrue Holiday",
+                "pts18": 33,
+                "pts19": 25
+              },
+              {
+                "player": "D'Angelo Russell",
+                "pts18": 64,
+                "pts19": 26
+              },
+              {
+                "player": "Mike Conley",
+                "pts18": 50,
+                "pts19": 27
+              },
+              {
+                "player": "CJ McCollum",
+                "pts18": 23,
+                "pts19": 28
+              },
+              {
+                "player": "Nikola Vucevic",
+                "pts18": 54,
+                "pts19": 29
+              },
+              {
+                "player": "John Wall",
+                "pts18": 30,
+                "pts19": 30
+              },
+              {
+                "player": "Buddy Hield",
+                "pts18": 94,
+                "pts19": 31
+              },
+              {
+                "player": "Nikola Jokic",
+                "pts18": 37,
+                "pts19": 32
+              },
+              {
+                "player": "Tobias Harris",
+                "pts18": 36,
+                "pts19": 33
+              },
+              {
+                "player": "Lou Williams",
+                "pts18": 18,
+                "pts19": 35
+              },
+              {
+                "player": "Danilo Gallinari",
+                "pts18": 65,
+                "pts19": 36
+              },
+              {
+                "player": "John Collins",
+                "pts18": 160,
+                "pts19": 37
+              },
+              {
+                "player": "Victor Oladipo",
+                "pts18": 12,
+                "pts19": 39
+              },
+              {
+                "player": "Lauri Markkanen",
+                "pts18": 66,
+                "pts19": 40
+              },
+              {
+                "player": "Jimmy Butler",
+                "pts18": 19,
+                "pts19": 41
+              },
+              {
+                "player": "Kyle Kuzma",
+                "pts18": 59,
+                "pts19": 42
+              },
+              {
+                "player": "Khris Middleton",
+                "pts18": 26,
+                "pts19": 43
+              },
+              {
+                "player": "Brandon Ingram",
+                "pts18": 60,
+                "pts19": 44
+              },
+              {
+                "player": "Jamal Murray",
+                "pts18": 52,
+                "pts19": 45
+              },
+              {
+                "player": "Andrew WigginsMIN",
+                "pts18": 42,
+                "pts19": 46
+              },
+              {
+                "player": "Tim Hardaway Jr.",
+                "pts18": 45,
+                "pts19": 47
+              },
+              {
+                "player": "JJ Redick",
+                "pts18": 49,
+                "pts19": 48
+              },
+              {
+                "player": "Derrick Rose",
+                "pts18": 214,
+                "pts19": 49
+              },
+              {
+                "player": "T.J. Warren",
+                "pts18": 29,
+                "pts19": 50
+              },
+              {
+                "player": "Bojan Bogdanovic",
+                "pts18": 80,
+                "pts19": 51
+              },
+              {
+                "player": "Andre Drummond",
+                "pts18": 70,
+                "pts19": 52
+              },
+              {
+                "player": "De'Aaron Fox",
+                "pts18": 141,
+                "pts19": 53
+              },
+              {
+                "player": "Kevin Love",
+                "pts18": 44,
+                "pts19": 54
+              },
+              {
+                "player": "Pascal Siakam",
+                "pts18": 249,
+                "pts19": 56
+              },
+              {
+                "player": "Ben Simmons",
+                "pts18": 61,
+                "pts19": 57
+              },
+              {
+                "player": "Jordan Clarkson",
+                "pts18": 90,
+                "pts19": 58
+              },
+              {
+                "player": "Spencer Dinwiddie",
+                "pts18": 118,
+                "pts19": 59
+              },
+              {
+                "player": "Clint Capela",
+                "pts18": 91,
+                "pts19": 61
+              },
+              {
+                "player": "Montrezl Harrell",
+                "pts18": 152,
+                "pts19": 62
+              },
+              {
+                "player": "Josh Richardson",
+                "pts18": 106,
+                "pts19": 63
+              },
+              {
+                "player": "Harrison Barnes",
+                "pts18": 34,
+                "pts19": 64
+              },
+              {
+                "player": "DeMarcus Cousins",
+                "pts18": 9,
+                "pts19": 66
+              },
+              {
+                "player": "Eric Gordon",
+                "pts18": 38,
+                "pts19": 67
+              },
+              {
+                "player": "Aaron Gordon",
+                "pts18": 43,
+                "pts19": 68
+              },
+              {
+                "player": "Eric Bledsoe",
+                "pts18": 41,
+                "pts19": 69
+              },
+              {
+                "player": "Rudy Gobert",
+                "pts18": 93,
+                "pts19": 70
+              },
+              {
+                "player": "Jayson Tatum",
+                "pts18": 88,
+                "pts19": 71
+              },
+              {
+                "player": "Malcolm Brogdon",
+                "pts18": 103,
+                "pts19": 72
+              },
+              {
+                "player": "Jusuf Nurkic",
+                "pts18": 78,
+                "pts19": 73
+              },
+              {
+                "player": "Chris Paul",
+                "pts18": 35,
+                "pts19": 74
+              },
+              {
+                "player": "Jonas Valanciunas",
+                "pts18": 113,
+                "pts19": 75
+              },
+              {
+                "player": "Dennis Schroder",
+                "pts18": 32,
+                "pts19": 76
+              },
+              {
+                "player": "Reggie Jackson",
+                "pts18": 75,
+                "pts19": 77
+              },
+              {
+                "player": "Jeremy Lamb",
+                "pts18": 105,
+                "pts19": 78
+              },
+              {
+                "player": "Kelly Oubre Jr.",
+                "pts18": 134,
+                "pts19": 79
+              },
+              {
+                "player": "Nikola Mirotic",
+                "pts18": 63,
+                "pts19": 80
+              },
+              {
+                "player": "Evan Fournier",
+                "pts18": 40,
+                "pts19": 81
+              },
+              {
+                "player": "Terrence Ross",
+                "pts18": 198,
+                "pts19": 82
+              },
+              {
+                "player": "Dwyane Wade",
+                "pts18": 146,
+                "pts19": 83
+              },
+              {
+                "player": "Serge Ibaka",
+                "pts18": 115,
+                "pts19": 84
+              },
+              {
+                "player": "Emmanuel Mudiay",
+                "pts18": 202,
+                "pts19": 86
+              },
+              {
+                "player": "Jabari Parker",
+                "pts18": 116,
+                "pts19": 87
+              },
+              {
+                "player": "Kyle Lowry",
+                "pts18": 55,
+                "pts19": 89
+              },
+              {
+                "player": "Bobby Portis",
+                "pts18": 98,
+                "pts19": 90
+              },
+              {
+                "player": "Bogdan Bogdanovic",
+                "pts18": 135,
+                "pts19": 91
+              },
+              {
+                "player": "Domantas Sabonis",
+                "pts18": 138,
+                "pts19": 92
+              },
+              {
+                "player": "Marcus Morris Sr.",
+                "pts18": 92,
+                "pts19": 93
+              },
+              {
+                "player": "Otto Porter Jr.",
+                "pts18": 71,
+                "pts19": 94
+              },
+              {
+                "player": "Steven Adams",
+                "pts18": 89,
+                "pts19": 95
+              },
+              {
+                "player": "Goran Dragic",
+                "pts18": 47,
+                "pts19": 97
+              },
+              {
+                "player": "Rudy Gay",
+                "pts18": 143,
+                "pts19": 98
+              },
+              {
+                "player": "Joe Harris",
+                "pts18": 156,
+                "pts19": 99
+              },
+              {
+                "player": "Caris LeVert",
+                "pts18": 127,
+                "pts19": 100
+              }
+            ]
+          }
+          this.setState({
+                    initData:nba_mip.data,
+                    viewData: dm.varia(nba_mip.data)
+                })
+        // axios.get('/static/nba_mip.json')
+        // .then(res=>{
+        //     this.setState({
+        //         initData: res.data.data,
+        //         viewData: dm.varia(res.data.data)
+        //     })
+        // })
+        let covid = {
+            "code": 200,
+            "data": [
+              {
+                "State": "Alabama",
+                "Before_per_Million": 131,
+                "After_per_Million": 152,
+                "Party": "Republican Party",
+                "Population": 4903185,
+                "Before": 644,
+                "After": 745
+              },
+              {
+                "State": "Alaska",
+                "Before_per_Million": 19,
+                "After_per_Million": 27,
+                "Party": "Republican Party",
+                "Population": 731545,
+                "Before": 14,
+                "After": 20
+              },
+              {
+                "State": "Arizona",
+                "Before_per_Million": 302,
+                "After_per_Million": 379,
+                "Party": "Republican Party",
+                "Population": 7278717,
+                "Before": 2200,
+                "After": 2760
+              },
+              {
+                "State": "Arkansas",
+                "Before_per_Million": 112,
+                "After_per_Million": 214,
+                "Party": "Republican Party",
+                "Population": 3017804,
+                "Before": 337,
+                "After": 645
+              },
+              {
+                "State": "California",
+                "Before_per_Million": 96,
+                "After_per_Million": 124,
+                "Party": "Democratic Party",
+                "Population": 39512223,
+                "Before": 3802,
+                "After": 4889
+              },
+              {
+                "State": "Colorado",
+                "Before_per_Million": 35,
+                "After_per_Million": 50,
+                "Party": "Democratic Party",
+                "Population": 5758736,
+                "Before": 200,
+                "After": 289
+              },
+              {
+                "State": "Connecticut",
+                "Before_per_Million": 19,
+                "After_per_Million": 27,
+                "Party": "Democratic Party",
+                "Population": 3565287,
+                "Before": 68,
+                "After": 97
+              },
+              {
+                "State": "Delaware",
+                "Before_per_Million": 54,
+                "After_per_Million": 69,
+                "Party": "Democratic Party",
+                "Population": 973764,
+                "Before": 53,
+                "After": 67
+              },
+              {
+                "State": "Florida",
+                "Before_per_Million": 111,
+                "After_per_Million": 365,
+                "Party": "Unclear",
+                "Population": 21477737,
+                "Before": 2383,
+                "After": 7843
+              },
+              {
+                "State": "Georgia",
+                "Before_per_Million": 74,
+                "After_per_Million": 176,
+                "Party": "Republican Party",
+                "Population": 10617423,
+                "Before": 783,
+                "After": 1868
+              },
+              {
+                "State": "Hawaii",
+                "Before_per_Million": 4,
+                "After_per_Million": 11,
+                "Party": "Democratic Party",
+                "Population": 1415872,
+                "Before": 5,
+                "After": 16
+              },
+              {
+                "State": "Idaho",
+                "Before_per_Million": 64,
+                "After_per_Million": 114,
+                "Party": "Republican Party",
+                "Population": 1787065,
+                "Before": 114,
+                "After": 203
+              },
+              {
+                "State": "Illinois",
+                "Before_per_Million": 46,
+                "After_per_Million": 67,
+                "Party": "Democratic Party",
+                "Population": 12671821,
+                "Before": 587,
+                "After": 845
+              },
+              {
+                "State": "Indiana",
+                "Before_per_Million": 50,
+                "After_per_Million": 63,
+                "Party": "Republican Party",
+                "Population": 6732219,
+                "Before": 336,
+                "After": 425
+              },
+              {
+                "State": "Iowa",
+                "Before_per_Million": 56,
+                "After_per_Million": 121,
+                "Party": "Unclear",
+                "Population": 3155070,
+                "Before": 178,
+                "After": 382
+              },
+              {
+                "State": "Kansas",
+                "Before_per_Million": 49,
+                "After_per_Million": 84,
+                "Party": "Republican Party",
+                "Population": 2913314,
+                "Before": 144,
+                "After": 246
+              },
+              {
+                "State": "Kentucky",
+                "Before_per_Million": 15,
+                "After_per_Million": 46,
+                "Party": "Republican Party",
+                "Population": 4467673,
+                "Before": 67,
+                "After": 205
+              },
+              {
+                "State": "Lousiana",
+                "Before_per_Million": 102,
+                "After_per_Million": 202,
+                "Party": "Republican Party",
+                "Population": 4648794,
+                "Before": 474,
+                "After": 940
+              },
+              {
+                "State": "Maine",
+                "Before_per_Million": 16,
+                "After_per_Million": 29,
+                "Party": "Democratic Party",
+                "Population": 1344212,
+                "Before": 22,
+                "After": 39
+              },
+              {
+                "State": "Maryland",
+                "Before_per_Million": 66,
+                "After_per_Million": 55,
+                "Party": "Democratic Party",
+                "Population": 6045680,
+                "Before": 399,
+                "After": 333
+              },
+              {
+                "State": "Massachusetts",
+                "Before_per_Million": 35,
+                "After_per_Million": 40,
+                "Party": "Democratic Party",
+                "Population": 6892503,
+                "Before": 244,
+                "After": 276
+              },
+              {
+                "State": "Michigan",
+                "Before_per_Million": 24,
+                "After_per_Million": 30,
+                "Party": "Democratic Party",
+                "Population": 9986857,
+                "Before": 237,
+                "After": 298
+              },
+              {
+                "State": "Minnesota",
+                "Before_per_Million": 49,
+                "After_per_Million": 75,
+                "Party": "Democratic Party",
+                "Population": 5639632,
+                "Before": 275,
+                "After": 423
+              },
+              {
+                "State": "Mississippi",
+                "Before_per_Million": 79,
+                "After_per_Million": 236,
+                "Party": "Republican Party",
+                "Population": 2976149,
+                "Before": 236,
+                "After": 702
+              },
+              {
+                "State": "Missouri",
+                "Before_per_Million": 41,
+                "After_per_Million": 66,
+                "Party": "Republican Party",
+                "Population": 6137428,
+                "Before": 253,
+                "After": 403
+              },
+              {
+                "State": "Montana",
+                "Before_per_Million": 14,
+                "After_per_Million": 19,
+                "Party": "Republican Party",
+                "Population": 1068778,
+                "Before": 15,
+                "After": 20
+              },
+              {
+                "State": "Nebraska",
+                "Before_per_Million": 97,
+                "After_per_Million": 95,
+                "Party": "Republican Party",
+                "Population": 1934408,
+                "Before": 187,
+                "After": 184
+              },
+              {
+                "State": "Nevada",
+                "Before_per_Million": 92,
+                "After_per_Million": 214,
+                "Party": "Democratic Party",
+                "Population": 3080156,
+                "Before": 284,
+                "After": 659
+              },
+              {
+                "State": "New Hampshire",
+                "Before_per_Million": 26,
+                "After_per_Million": 19,
+                "Party": "Democratic Party",
+                "Population": 1359711,
+                "Before": 35,
+                "After": 26
+              },
+              {
+                "State": "New Jersey",
+                "Before_per_Million": 31,
+                "After_per_Million": 37,
+                "Party": "Democratic Party",
+                "Population": 8882190,
+                "Before": 274,
+                "After": 327
+              },
+              {
+                "State": "New Mexico",
+                "Before_per_Million": 49,
+                "After_per_Million": 98,
+                "Party": "Democratic Party",
+                "Population": 2096829,
+                "Before": 102,
+                "After": 205
+              },
+              {
+                "State": "New York",
+                "Before_per_Million": 31,
+                "After_per_Million": 37,
+                "Party": "Democratic Party",
+                "Population": 19453561,
+                "Before": 605,
+                "After": 711
+              },
+              {
+                "State": "North Carolina",
+                "Before_per_Million": 97,
+                "After_per_Million": 136,
+                "Party": "Republican Party",
+                "Population": 10488084,
+                "Before": 1017,
+                "After": 1428
+              },
+              {
+                "State": "North Dakota",
+                "Before_per_Million": 39,
+                "After_per_Million": 45,
+                "Party": "Republican Party",
+                "Population": 762062,
+                "Before": 30,
+                "After": 34
+              },
+              {
+                "State": "Ohio",
+                "Before_per_Million": 44,
+                "After_per_Million": 76,
+                "Party": "Unclear",
+                "Population": 11689100,
+                "Before": 515,
+                "After": 886
+              },
+              {
+                "State": "Oklahoma",
+                "Before_per_Million": 79,
+                "After_per_Million": 70,
+                "Party": "Republican Party",
+                "Population": 3956971,
+                "Before": 312,
+                "After": 276
+              },
+              {
+                "State": "Oregon",
+                "Before_per_Million": 43,
+                "After_per_Million": 51,
+                "Party": "Democratic Party",
+                "Population": 4217737,
+                "Before": 182,
+                "After": 216
+              },
+              {
+                "State": "Pennsylvania",
+                "Before_per_Million": 32,
+                "After_per_Million": 41,
+                "Party": "Democratic Party",
+                "Population": 12801989,
+                "Before": 407,
+                "After": 525
+              },
+              {
+                "State": "Rhode Island",
+                "Before_per_Million": 55,
+                "After_per_Million": 17,
+                "Party": "Democratic Party",
+                "Population": 1059361,
+                "Before": 58,
+                "After": 18
+              },
+              {
+                "State": "South Carolina",
+                "Before_per_Million": 139,
+                "After_per_Million": 262,
+                "Party": "Republican Party",
+                "Population": 5148714,
+                "Before": 718,
+                "After": 1347
+              },
+              {
+                "State": "South Dakota",
+                "Before_per_Million": 50,
+                "After_per_Million": 52,
+                "Party": "Republican Party",
+                "Population": 884659,
+                "Before": 44,
+                "After": 46
+              },
+              {
+                "State": "Tennessee",
+                "Before_per_Million": 86,
+                "After_per_Million": 125,
+                "Party": "Republican Party",
+                "Population": 6829174,
+                "Before": 588,
+                "After": 851
+              },
+              {
+                "State": "Texas",
+                "Before_per_Million": 127,
+                "After_per_Million": 186,
+                "Party": "Republican Party",
+                "Population": 28995881,
+                "Before": 3682,
+                "After": 5388
+              },
+              {
+                "State": "Utah",
+                "Before_per_Million": 128,
+                "After_per_Million": 168,
+                "Party": "Republican Party",
+                "Population": 3205958,
+                "Before": 410,
+                "After": 538
+              },
+              {
+                "State": "Vermont",
+                "Before_per_Million": 3,
+                "After_per_Million": 5,
+                "Party": "Democratic Party",
+                "Population": 623989,
+                "Before": 2,
+                "After": 3
+              },
+              {
+                "State": "Virginia",
+                "Before_per_Million": 53,
+                "After_per_Million": 68,
+                "Party": "Democratic Party",
+                "Population": 8535519,
+                "Before": 450,
+                "After": 577
+              },
+              {
+                "State": "Washington",
+                "Before_per_Million": 45,
+                "After_per_Million": 61,
+                "Party": "Democratic Party",
+                "Population": 7614893,
+                "Before": 344,
+                "After": 461
+              },
+              {
+                "State": "West Virginia",
+                "Before_per_Million": 18,
+                "After_per_Million": 26,
+                "Party": "Republican Party",
+                "Population": 1792147,
+                "Before": 32,
+                "After": 46
+              },
+              {
+                "State": "Wisconsin",
+                "Before_per_Million": 54,
+                "After_per_Million": 81,
+                "Party": "Democratic Party",
+                "Population": 5822434,
+                "Before": 314,
+                "After": 472
+              },
+              {
+                "State": "Wyoming",
+                "Before_per_Million": 36,
+                "After_per_Million": 52,
+                "Party": "Republican Party",
+                "Population": 578759,
+                "Before": 21,
+                "After": 30
+              }
+            ]
+          }
 
-        axios.get('../../static/covid.json')
-        .then(res=>{
-            this.setState({
-                initData_covid: res.data.data,
-                viewData_covid: dm.varia(res.data.data)
-            })
+        this.setState({
+            initData_covid:covid.data,
+            viewData_covid: dm.varia(covid.data)
         })
+        // axios.get('/static/covid.json')
+        // .then(res=>{
+        //     this.setState({
+        //         initData_covid: res.data.data,
+        //         viewData_covid: dm.varia(res.data.data)
+        //     })
+        // })
     
-        axios.get('../../static/example.json')
-        .then(res=>{
-            this.setState({
-                initData_example: res.data.data,
-                viewData_example: dm.varia(res.data.data)
-            })
+        let example = {
+            "code": 200,
+            "data": [
+              {
+                "name": "Livia",
+                "midterm": 60,
+                "final": 69
+              },
+              {
+                "name": "Emma",
+                "midterm": 72,
+                "final": 79
+              },
+              {
+                "name": "Ava",
+                "midterm": 81,
+                "final": 85
+              },
+              {
+                "name": "Sophia",
+                "midterm": 83,
+                "final": 96
+              },
+              {
+                "name": "Isabella",
+                "midterm": 87,
+                "final": 94
+              },
+              {
+                "name": "Charlotte",
+                "midterm": 72,
+                "final": 75
+              },
+              {
+                "name": "Amelia",
+                "midterm": 76,
+                "final": 79
+              },
+              {
+                "name": "Mia",
+                "midterm": 91,
+                "final": 92
+              },
+              {
+                "name": "Harper",
+                "midterm": 64,
+                "final": 75
+              },
+              {
+                "name": "Evelyn",
+                "midterm": 72,
+                "final": 79
+              },
+              {
+                "name": "Abigail",
+                "midterm": 65,
+                "final": 89
+              },
+              {
+                "name": "Emily",
+                "midterm": 79,
+                "final": 72
+              },
+              {
+                "name": "Ella",
+                "midterm": 93,
+                "final": 84
+              },
+              {
+                "name": "Elizabeth",
+                "midterm": 75,
+                "final": 79
+              },
+              {
+                "name": "Camila",
+                "midterm": 95,
+                "final": 90
+              },
+              {
+                "name": "Luna",
+                "midterm": 81,
+                "final": 84
+              },
+              {
+                "name": "Sofia",
+                "midterm": 62,
+                "final": 72
+              },
+              {
+                "name": "Avery",
+                "midterm": 75,
+                "final": 68
+              },
+              {
+                "name": "Mila",
+                "midterm": 60,
+                "final": 73
+              },
+              {
+                "name": "Aria",
+                "midterm": 74,
+                "final": 75
+              },
+              {
+                "name": "Scarlett",
+                "midterm": 68,
+                "final": 71
+              },
+              {
+                "name": "Penelope",
+                "midterm": 64,
+                "final": 67
+              },
+              {
+                "name": "Layla",
+                "midterm": 71,
+                "final": 72
+              },
+              {
+                "name": "Chloe",
+                "midterm": 85,
+                "final": 85
+              },
+              {
+                "name": "Victoria",
+                "midterm": 65,
+                "final": 66
+              },
+              {
+                "name": "Madison",
+                "midterm": 78,
+                "final": 72
+              },
+              {
+                "name": "Eleanor",
+                "midterm": 62,
+                "final": 74
+              },
+              {
+                "name": "Grace",
+                "midterm": 82,
+                "final": 89
+              },
+              {
+                "name": "Nora",
+                "midterm": 85,
+                "final": 67
+              },
+              {
+                "name": "Riley",
+                "midterm": 70,
+                "final": 78
+              },
+              {
+                "name": "Zoey",
+                "midterm": 87,
+                "final": 71
+              },
+              {
+                "name": "Hannah",
+                "midterm": 77,
+                "final": 60
+              },
+              {
+                "name": "Hazel",
+                "midterm": 83,
+                "final": 90
+              },
+              {
+                "name": "Lily",
+                "midterm": 72,
+                "final": 76
+              },
+              {
+                "name": "Ellie",
+                "midterm": 92,
+                "final": 70
+              },
+              {
+                "name": "Violet",
+                "midterm": 75,
+                "final": 65
+              },
+              {
+                "name": "Lillian",
+                "midterm": 76,
+                "final": 79
+              },
+              {
+                "name": "Zoe",
+                "midterm": 78,
+                "final": 62
+              },
+              {
+                "name": "Stella",
+                "midterm": 59,
+                "final": 69
+              },
+              {
+                "name": "Aurora",
+                "midterm": 84,
+                "final": 76
+              }
+            ]
+          }
+          this.setState({
+            initData_example: example.data,
+            viewData_example: dm.varia(example.data)
         })
+          
+        // axios.get('/static/example.json')
+        // .then(res=>{
+        //     this.setState({
+        //         initData_example: res.data.data,
+        //         viewData_example: dm.varia(res.data.data)
+        //     })
+        // })
     }
 
     appendValueHandle(event){
@@ -326,7 +1454,6 @@ class DOM extends Component {
         r = [xr,yr]
         } 
 
-        // vis(svg, data, o,  [109.62, 92.81790671940452],false)
 
         vis(svg, data, o, r,false)
     }
