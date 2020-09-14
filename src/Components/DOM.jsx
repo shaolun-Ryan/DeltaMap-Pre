@@ -18,6 +18,8 @@ class DOM extends Component {
             selectPlot: '',
             filterAlgo: 'number',
             appendValue: 15,
+            extent:0,
+            tips_content:'',
 
             dataSource:'Example',
 
@@ -48,10 +50,12 @@ class DOM extends Component {
         this.displayHandle = this.displayHandle.bind(this)
         this.selectPlotHandle = this.selectPlotHandle.bind(this)
         this.renderExample = this.renderExample.bind(this)
+        this.getExtent = this.getExtent.bind(this)
 
     }
 
     componentDidMount(){
+        
         let nba_mip = {
             "code": 200,
             "data": [
@@ -1203,6 +1207,8 @@ class DOM extends Component {
         //         viewData_example: dm.varia(res.data.data)
         //     })
         // })
+
+
     }
 
     appendValueHandle(event){
@@ -1296,6 +1302,11 @@ class DOM extends Component {
         } 
 
         vis_mip(svg, data, o, r,false,display)
+        
+        /* 构造解释语句tips */
+        this.setState({tips_content:
+            <p>· Delta Map generated from data source NBA 2018-19 MIP reflects points per game changes for top 100 players(except for rookies and injured players) between 2018 (outer circle) and 2019 (inner circle) season. Please note that the value is rank-based, which means the small value is for top players. The longer the chord is, the greater the points per game change. Adjust the filtering threshold to change the inner circle radius and line segments left.</p>
+        })
     }
 
     renderCOVID(){
@@ -1374,6 +1385,11 @@ class DOM extends Component {
         } 
 
         vis_COVID19(svg, data, o, r,this.state.selectPlot,display)
+        
+        /* 构造解释语句tips */
+        this.setState({tips_content:
+            <p>· Delta Map generated from data source COVID-19 reflects statewide daily confirmed case number changes before (outer circle) and after (inner circle) George Floyd protest. After select the SELECT PLOT 'mask-order' option,  <span className='covid_blue'>blue</span> line segments denote states which issued a required mask-order and <span className='covid_red'>red</span> ones are for states which never have. The longer the chord, the greater the case number changes. Adjust the filtering threshold to change the inner circle radius and line segments left.</p>
+        })
     }
 
     renderExample(){
@@ -1456,22 +1472,45 @@ class DOM extends Component {
 
 
         vis(svg, data, o, r,false)
+
+        /* 构造解释语句tips */
+        this.setState({tips_content:
+            <p>· Delta Map generated from data source EXAMPLE reflects the grade changes in class Cloud Infrastructure between mid-term (outer circle) and final exam (inner circle) for an entire class (38 students). <span className='green'>Green</span> line segments denote students with increasing grades and <span className='red'>red</span> ones are for students with decreasing grades. The longer the chord, the greater the grade changes. Adjust the filtering threshold to change the inner circle radius and line segments left.</p>
+        })
     }
 
     displayHandle(event){
         this.setState({display: event.target.value});
     }
 
+    getExtent(arr){
+        let [name,start,end] = Object.keys(arr[0])
+    let attributes = Object.keys(arr[0]).splice(3)
+    
+    /* 求出始末值分布的最大和最小区间 , 是解构语法*/
+    let [min,max] = d3.extent(arr.reduce((prev,cur)=>{
+        prev.push(+cur[start], +cur[end])
+        return prev
+    },[]))
+
+    return [min,max];
+    }
+
     handleSubmit(){
         if(this.state.dataSource === 'Example'){
             this.renderExample()
+            this.setState({extent:this.state.initData_example.length-2})
         }else if(this.state.dataSource === 'NBA 2018-19 MIP'){
             this.renderNBA()
+            this.setState({extent:this.state.initData.length})
         }else if(this.state.dataSource === 'COVID-19'){
             this.renderCOVID()
+            this.setState({extent:this.state.initData_covid.length})
         }else{
             alert('No data source input')
         }
+
+        
     }
 
     render(){
@@ -1493,7 +1532,7 @@ class DOM extends Component {
                     <div className="lab-logo">
                     
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                 viewBox="-30 5 220 50" width="200" height="65">
+                 viewBox="15 5 270 60" width="200" height="65">
                 
                 <g>
                     <line className="st0" x1="117.3" y1="38.1" x2="80.6" y2="19.8"/>
@@ -1527,7 +1566,7 @@ class DOM extends Component {
                 </g>
             </svg>
                     </div>
-                    <div className="lab--logo">
+                    {/* <div className="lab--logo">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
 	width="300" height="150" viewBox="400 100 1620 1780" className="logo">
 <g id="图层_2">
@@ -1559,7 +1598,7 @@ class DOM extends Component {
 	<text transform="matrix(1 0 0 1 348.0562 784.3447)" className="sst7 sst5 sst8 sst9">SYsstEM LABORATORY</text>
 </g>
 </svg>
-                    </div>
+                    </div> */}
 
 
                     <div className='child-1'>
@@ -1588,14 +1627,15 @@ class DOM extends Component {
                     </div>
 
                     <div className='child-3'>
-                        <label className="control-label myLabel">Value</label>
+                        <label className="control-label myLabel">Filtering threshold</label>
                         <input type="text" className="form-control col-6 pull-right"
                                value={this.state.appendValue}
                                onChange={this.appendValueHandle}
                         />
+                        <span>(1-{this.state.extent})</span>
                     </div>
 
-                    <div>
+                    <div className='child-4'>
                         <label className="control-label myLabel pull-left">Select plot</label>
                         <select className="custom-select-sm custom-select col-sm-8 pull-right"
                                 value={this.state.selectPlot}
@@ -1609,12 +1649,12 @@ class DOM extends Component {
                         <div className="custom-control custom-radio custom-control-inline">
                             <input type="radio" value="inc" id="customRadio1" name="customRadio"
                                    className="custom-control-input" />
-                            <label className="custom-control-label myText" htmlFor="customRadio1">Only for Inc</label>
+                            <label className="custom-control-label myText" htmlFor="customRadio1">Increased only</label>
                         </div>
                         <div className="custom-control custom-radio custom-control-inline pull-right">
                             <input type="radio" value="dec" id="customRadio2" name="customRadio"
                                    className="custom-control-input" defaultChecked/>
-                            <label className="custom-control-label myText" htmlFor="customRadio2">Only for Dec</label>
+                            <label className="custom-control-label myText" htmlFor="customRadio2">Decreased only</label>
                         </div>
                     </div>
 
@@ -1632,6 +1672,10 @@ class DOM extends Component {
 
                     </div>
 
+                </div>
+                <div className="container-tip">
+                    <u>Tips</u>
+                    {this.state.tips_content===''?'':this.state.tips_content}
                 </div>
             </div>
         )
